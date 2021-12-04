@@ -2,7 +2,7 @@ package com.example.workwithexceptions.service;
 
 public interface EmployeeService {
 
-    void addEmployee(String firstName, String lastName);
+    void addEmployee(String firstName, String lastName) ;
 
     void removeEmployee(String firstName, String lastName);
 
