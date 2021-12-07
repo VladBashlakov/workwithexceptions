@@ -1,11 +1,14 @@
 package com.example.workwithexceptions.controller;
 
+import com.example.workwithexceptions.service.Employee;
 import com.example.workwithexceptions.service.EmployeeService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequestMapping("/employee")
 @RestController
@@ -33,6 +36,11 @@ public class FirstController {
     public String showFind(@RequestParam String firstName, @RequestParam String lastName) {
         employeeService.findEmployee(firstName, lastName);
         return "сотрудник " + firstName + " " + lastName + " успешно найден";
+    }
+
+    @GetMapping("/printAll")
+    public List<Employee> printAll() {
+        return employeeService.printAllEmployees();
     }
 }
 

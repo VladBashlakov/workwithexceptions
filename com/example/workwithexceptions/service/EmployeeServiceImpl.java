@@ -2,50 +2,42 @@ package com.example.workwithexceptions.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final Employee[] employees = new Employee[10];
+    List<Employee> employees = new ArrayList<>();
 
     @Override
-    public void addEmployee(String firstName, String lastName) throws EmployeeBookOverFlowException {
-        for (int i = 0; i < 15; i++) {
-            if (i > employees.length) {
-                throw new EmployeeBookOverFlowException();
-            }
-            if (employees[i] == null) {
-                employees[i] = new Employee(firstName, lastName);
-                return;
-            }
+    public void addEmployee(String firstName, String lastName) {
+        employees.add(new Employee(firstName, lastName));
+    }
+
+    @Override
+    public void removeEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (findEmployee(firstName, lastName)) {
+            employees.remove(employee);
         }
     }
 
-
     @Override
-    public void removeEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
-
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                throw new EmployeeNotFoundException();
-            }
-
-            if (employees[i] != null && employees[i].equals(new Employee(firstName, lastName))) {
-                employees[i] = null;
-                return;
-            }
+    public boolean findEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.contains(employee)) {
+            return true;
+        } else {
+            throw new EmployeeNotFoundException();
         }
     }
 
-
     @Override
-    public void findEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i] == null) {
-                throw new EmployeeNotFoundException();
-            }
-            if (employees[i] != null && employees[i].equals(new Employee(firstName, lastName))) {
-                return;
-            }
-        }
+    public List<Employee> printAllEmployees() {
+        return employees;
     }
 }
+
+
+
 
