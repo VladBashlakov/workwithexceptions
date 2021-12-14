@@ -2,40 +2,56 @@ package com.example.workwithexceptions.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    List<Employee> employees = new ArrayList<>();
+    Map<Integer, Employee> employees;
 
-    @Override
-    public void addEmployee(String firstName, String lastName) {
-        employees.add(new Employee(firstName, lastName));
+    private Integer id = 0;
+
+    public EmployeeServiceImpl() {
+        this.employees = new HashMap<>();
+    }
+
+    private Integer getId() {
+        Integer result = id;
+        id = id + 1;
+        return result;
     }
 
     @Override
-    public void removeEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (findEmployee(firstName, lastName)) {
-            employees.remove(employee);
+    public void removeEmployee(Integer id) {
+        if (employees.containsKey(id)) {
+            employees.remove(id);
+        } else {
+            throw new EmployeeNotFoundException();
         }
     }
 
+
     @Override
-    public boolean findEmployee(String firstName, String lastName) throws EmployeeNotFoundException {
-        Employee employee = new Employee(firstName, lastName);
-        if (employees.contains(employee)) {
-            return true;
+    public Employee getEmployee(Integer id) {
+        if (employees.containsKey(id)) {
+            return employees.get(id);
         } else {
             throw new EmployeeNotFoundException();
         }
     }
 
     @Override
-    public List<Employee> printAllEmployees() {
-        return employees;
+    public void addEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        employees.put(getId(), employee);
     }
+
+    @Override
+    public HashMap<Integer, Employee> printAllEmployees() {
+        return (HashMap<Integer, Employee>) employees;
+    }
+
+
 }
 
 
