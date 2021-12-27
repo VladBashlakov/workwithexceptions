@@ -8,5 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class EmployeeNotFoundException extends RuntimeException {
     private static final String DEFAULT_MESSAGE = "Employee not found";
 
+    public  EmployeeNotFoundException() {
+        super(DEFAULT_MESSAGE);
+            }
 
 }
