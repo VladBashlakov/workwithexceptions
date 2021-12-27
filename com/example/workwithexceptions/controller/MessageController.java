@@ -20,5 +20,6 @@ public class MessageController {
     public String add(@RequestParam String firstName, @RequestParam String lastName) {
         messagesService.check(firstName + lastName);
         return " сотрудник " + StringUtils.capitalize(firstName) + " " + lastName + " успешно создан";
+
     }
 }
