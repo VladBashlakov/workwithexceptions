@@ -1,4 +1,4 @@
-package com.example.workwithexceptions.service;
+package com.example.workwithexceptions.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class EmployeeNotFoundException extends RuntimeException {
     private static final String DEFAULT_MESSAGE = "Employee not found";
 
-    public EmployeeNotFoundException() {
+    public  EmployeeNotFoundException() {
         super(DEFAULT_MESSAGE);
+            }
 
-    }
 }
