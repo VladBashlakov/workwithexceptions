@@ -1,9 +1,11 @@
 package com.example.workwithexceptions.service.impl;
 
 import com.example.workwithexceptions.data.Employee;
+import com.example.workwithexceptions.exceptions.BadNameError;
 import com.example.workwithexceptions.exceptions.EmployeeNotFoundException;
 import com.example.workwithexceptions.service.DepartmentService;
 import com.example.workwithexceptions.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -44,9 +46,20 @@ public class EmployeeServiceImpl implements EmployeeService, DepartmentService {
     }
 
     @Override
+    public boolean check(String str) {
+        if (!StringUtils.isEmpty(str) && StringUtils.isAlpha(str)) {
+            return true;
+        } else {
+            throw new BadNameError();
+        }
+    }
+
+    @Override
     public void addEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        employees.put(getId(), employee);
+
+        if (check(firstName) && check(lastName))
+            employees.put(getId(), new Employee(StringUtils.capitalize(firstName), StringUtils.capitalize(lastName)));
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.workwithexceptions.controller;
 
 import com.example.workwithexceptions.data.Employee;
 import com.example.workwithexceptions.service.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +22,10 @@ public class FirstController {
 
     @GetMapping("/add")
     public String showAdd(@RequestParam String firstName, @RequestParam String lastName) {
+
         employeeService.addEmployee(firstName, lastName);
-        return " сотрудник " + firstName + " " + lastName + " успешно создан";
+        return " сотрудник " + StringUtils.capitalize(firstName ) + " " + StringUtils.capitalize(lastName) + " успешно создан";
+
     }
 
     @GetMapping("/remove")

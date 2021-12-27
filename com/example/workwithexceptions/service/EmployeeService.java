@@ -14,6 +14,7 @@ public interface EmployeeService {
 
     HashMap<Integer, Employee> printAllEmployees();
 
+    boolean check(String str);
 
 
 }
