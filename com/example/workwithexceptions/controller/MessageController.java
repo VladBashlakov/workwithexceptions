@@ -19,7 +19,7 @@ public class MessageController {
     @GetMapping("/addEmp")
     public String add(@RequestParam String firstName, @RequestParam String lastName) {
         messagesService.check(firstName + lastName);
-        return " сотрудник " + StringUtils.capitalize(firstName) + " " + lastName + " успешно создан";
+        return " сотрудник " + StringUtils.capitalize(firstName) + " " + StringUtils.capitalize(lastName) + " успешно создан";
 
     }
 }
