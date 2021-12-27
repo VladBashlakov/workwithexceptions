@@ -1,15 +1,20 @@
 package com.example.workwithexceptions.service;
 
-import java.util.List;
+import com.example.workwithexceptions.data.Employee;
+
+import java.util.HashMap;
 
 public interface EmployeeService {
 
+    void removeEmployee(Integer id);
+
+    Employee getEmployee(Integer id);
+
     void addEmployee(String firstName, String lastName);
 
-    void removeEmployee(String firstName, String lastName);
+    HashMap<Integer, Employee> printAllEmployees();
 
-    boolean findEmployee(String firstName, String lastName);
+    boolean check(String str);
 
-    List<Employee> printAllEmployees();
 
 }
